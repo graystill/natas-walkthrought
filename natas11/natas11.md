@@ -64,4 +64,23 @@ function xor_encrypt($in) {
 2. Закодировать и зашифровать по обратному алгоритму новые данные
 3. вставить новые данные в cookie и перезагрузить страницу
 
-вытаскваем такой куки: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D
+[//]: # (я нихуя не понимаю ч тут делать, ну вот не ебу)
+
+
+вытаскваем такой куки: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D, затем декодим его в burp suit и получем: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=
+декодируем из base64, а затем шифреуем в xor на cyberchef
+
+после идём в любой онлайн-редактор пыхи (он же php) и вставляем данный код:
+```php
+<?php
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+echo json_encode($defaultdata);
+?>
+```
+на выходе в формате JSON: 
+> {"showpassword":"no","bgcolor":"#ffffff"}
+
+ВСТАВЛЯЕМ ЕГО И ПОЛУЧАЕМ:
+eDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoe
+
+ПОЛЕ СНОВА - XOR -> base64:
