@@ -1,22 +1,23 @@
 ### Natas 11
-Опять логинимся. Видим на странице, что куки зашифрованы XOR и поле для ввода. Смотрим исхзодный код.
 
-``` php
-<?
+Логинимся. Сайт говорит, что куки зашифрованы через XOR, ещё есть поле для ввода, где возможно менять цвет задника и возможность просмотреть исходный код.
+
+```php
 if($data["showpassword"] == "yes") {
     print "The password for natas12 is <censored><br>";
 }
-
-?>
 ```
-Здесь мы видим что пароль становится доступен если значение из массива по ключу showpassword будет yes
+ Видим, что если showpassword в массиве data будет иметь значение yes, то нам покажут пароль.
 
+ ```php
+ $data = loadData($defaultdata);
+ ```
+ data - массив, созданный функцией loadData, принимающтй на вход 
 
 ```php
-$data = loadData($defaultdata);
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
 ```
-тут видим что массив data создаётся функцией loadData, в которую передаются данные по умолчанию.
-
+defaultdata - строка, где ключу showpassword присвоено значение no, а bgcolor значение ffffff
 
 ```php
 function loadData($def) {
@@ -34,53 +35,11 @@ function loadData($def) {
     return $mydata;
 }
 ```
-данные загружаются из cookie, затем кодируются в base64 -> затем шифруются в XOR -> декодируются в формате JSON
-_XOR-метод шифрования, заключающийся в "наложении" последовательности случайных чисел на открытый тект (ист.Википедия)_
+рассмотрим функцию loadData, у которой есть параметр def. Так же эта функция работает с cookie (а это подсказка откуда начинать). Затем переменной mydata присваевается параметр def. Затем проверяет есть ли в массиве cookie ключ data, если да, то кодирует его в base64, шифрует xor и декодирует в формате json. Это всё, что нам требуется ~~(на данный момент, может оно потом дополнятся будет)~~.
 
-
-```php
-function xor_encrypt($in) {
-    $key = '<censored>';
-    $text = $in;
-    $outText = '';
-
-    // Iterate through each character
-    for($i=0;$i<strlen($text);$i++) {
-    $outText .= $text[$i] ^ $key[$i % strlen($key)];
-    }
-
-    return $outText;
-}
-```
-наконец, все значения устанавливаются.
-
-Что требуется сделать:
-
-1. Расшифровать XOR
-    - взять зашифрованные данные из куки
-    - декодировать base64
-    - закодировать данные по умолчанию в json-формат
-    - проксорить полученные строки
-2. Закодировать и зашифровать по обратному алгоритму новые данные
-3. вставить новые данные в cookie и перезагрузить страницу
-
-[//]: # (я нихуя не понимаю ч тут делать, ну вот не ебу)
-
-
-вытаскваем такой куки: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D, затем декодим его в burp suit и получем: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=
-декодируем из base64, а затем шифреуем в xor на cyberchef
-
-после идём в любой онлайн-редактор пыхи (он же php) и вставляем данный код:
-```php
-<?php
-$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
-echo json_encode($defaultdata);
-?>
-```
-на выходе в формате JSON: 
-> {"showpassword":"no","bgcolor":"#ffffff"}
-
-ВСТАВЛЯЕМ ЕГО И ПОЛУЧАЕМ:
-eDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoeDWoe
-
-ПОЛЕ СНОВА - XOR -> base64:
+1. Вытаскиваем куки. Лично у меня он такой: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D. %3D это как правило URL-шифрование, заменяем его на = и получется: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=.
+[//]: # ( сча как дома буду, начну думать над решенем
+1 - understand what that original "clear text" value is.
+2 - understand XOR encryption: no need to dive deep into the mathematical properties of the XOR operator: you need to focus on the relations between clear text, cipher text and key.
+3 - apply this knowledge to get the missing part of the source code
+4 - use that missing part to make that script do what you want.)

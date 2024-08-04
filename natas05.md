@@ -10,3 +10,4 @@
 1. DevTools -> console -> document.cookie="name=value" <kbd>Enter</kbd>
 2. DevTools -> Storage -> меняем поле value
 3. Burp Suit -> Proxy -> логинимся через внутренный браузер -> send to Repeater -> в рипетере в поле "Cookie" меняем его значение -> send -> Previev/Render
+4. curl --cookie "name=value" -u username:password url

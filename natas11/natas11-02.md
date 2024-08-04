@@ -56,11 +56,14 @@ function xor_encrypt($in) {
 так же можнопросмгтреть на функцию, овечающую за шифрование. Ей на вход подаётся параметр in, так же переменным key, text, outText присвоены следующие значения <censored>, in и ''.
 Ещё есть цикл, который и отвечает за шифрование, после чего функия возвращает нам outText
 
-В конце концов, заглядываем сайту под капот через дев-тулсы и достаём куки с графы data. Лично у меня оно такое: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D, но после убираем %3D, заменяя его на "=".
+В конце концов, заглядываем сайту под капот через дев-тулсы и достаём куки с графы data. Лично у меня оно такое: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D, но после убираем %3D (можно в burp suit), заменяя его на "=".
+[//]: # (ниже не рабочая залупа)
 
-Идём в cyberchef.com, в поде инпут вставляем наш куки
-Сначала декриптим Base64 -> XOR с ключом {"showpassword":"no","bgcolor":"#ffffff"} и кодировкой UTF-8. 
-Затем полученный XOR-ключ с той-же UTF-8 мешаем с инпутом {"showpassword":"yes","bgcolor":"#ffffff"} и кодируем в base64. Вуаля! На выходе у нас есть готовый куки: P3UcDSsgHwQ3JBgKNjNNX2YuChZme00HIzQACSslTV9mdAkDIjEJA2Yq
-Переходим на сайт и через девтулс заменяем наш куки-файл. Если обновить страницу, то у нас будет пароль от следующего уровня
+1 - understand what that original "clear text" value is.
+2 - understand XOR encryption: no need to dive deep into the mathematical properties of the XOR operator: you need to focus on the relations between clear text, cipher text and key.
+3 - apply this knowledge to get the missing part of the source code
+4 - use that missing part to make that script do what you want.
+
+Переходим на сайт и любым способом заменяем наш куки-файл. Если обновить страницу, то у нас будет пароль от следующего уровня
 
 [//]: # (я нихуя не понимаю ч тут делать, ну вот не ебу, надо в дискорд будет напаисать)
