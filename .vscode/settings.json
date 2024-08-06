@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.settings.applyToAllProfiles": [
+        "sonarlint.pathToNodeExecutable"
+    ],
+    "gradle.debug": true,
+    "gradle.disableConfirmations": true,
+    "gradle.javaDebug.cleanOutput": true,
+    "gradle.reuseTerminals": "all",
+    "gradle.showStoppedDaemons": true,
+    "gradle.allowParallelRun": true,
+    "gradle.nestedProjects": false
+}

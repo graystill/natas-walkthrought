@@ -38,8 +38,11 @@ function loadData($def) {
 рассмотрим функцию loadData, у которой есть параметр def. Так же эта функция работает с cookie (а это подсказка откуда начинать). Затем переменной mydata присваевается параметр def. Затем проверяет есть ли в массиве cookie ключ data, если да, то кодирует его в base64, шифрует xor и декодирует в формате json. Это всё, что нам требуется ~~(на данный момент, может оно потом дополнятся будет)~~.
 
 1. Вытаскиваем куки. Лично у меня он такой: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg%3D. %3D это как правило URL-шифрование, заменяем его на = и получется: HmYkBwozJw4WNyAAFyB1VUcqOE1JZjUIBis7ABdmbU1GIjEJAyIxTRg=.
-[//]: # ( сча как дома буду, начну думать над решенем
+
+[TODO:]: # (
 1 - understand what that original "clear text" value is.
 2 - understand XOR encryption: no need to dive deep into the mathematical properties of the XOR operator: you need to focus on the relations between clear text, cipher text and key.
 3 - apply this knowledge to get the missing part of the source code
 4 - use that missing part to make that script do what you want.)
+
+2. Возможно, то значение, которое зкаодировано в куки - 
