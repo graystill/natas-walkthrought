@@ -7,6 +7,8 @@
  * ?>
 */
 
+import javax.xml.bind.DatatypeConverter;
+import java.math.BigInteger;
 import java.util.Base64;
 
 public class decoder {
@@ -15,13 +17,13 @@ public class decoder {
         String binary = hex2bin(hex);
         System.out.println("Бинарное представление: " + binary); // на выходе - ==QcCtmMml1ViV3b
 
+
         var reversed = new StringBuilder(binary) // перевёртыш - b3ViV1lmMmtCcQ==
-        .reverse().toString(); 
+        .reverse().toString();
         System.out.println(reversed);
 
         String decodedString=new String(Base64.getDecoder().decode(reversed)); // декодим base64, на выходе - oubWYf2kBq
         System.out.println(decodedString);
-
     }
 
     /* это перевод из шестнадцатиричного в бинарное представление, спизженно со steckoverflov
@@ -31,11 +33,11 @@ public class decoder {
     public static String hex2bin (String hex) {
         StringBuilder bin = new StringBuilder("");
 
-        for (int i=0; i<hex.length(); i+=2) { 
-            String str = hex.substring(i, i+2); 
-            bin.append((char) Integer.parseInt(str, 16)); 
+        for (int i=0; i<hex.length(); i+=2) {
+            String str = hex.substring(i, i+2);
+            bin.append((char) Integer.parseInt(str, 16));
         }
 
         return bin.toString();
-    } 
+    }
 }

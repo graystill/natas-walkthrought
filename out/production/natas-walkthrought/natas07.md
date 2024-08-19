@@ -1,12 +1,14 @@
-### Natas 7
+# Natas 7
+<kbd>Username</kbd> natas7
 
-на страничке есть 2 нопк - Home и About. Если их протыкать, то ничего не произойдёт. Если заглянуть в исходный код, то найлётся подсказка что пароль лежит в директории /etc/natas_webpass/natas8
+<kbd>Password</kbd> bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
 
-При попытке просто добавить переход в эту директорию в конце URL-ссылки, то это даст лишь код 404. но если поменять вместо page=about на page=./../../../../../etc/natas_webpass/natas8 (так много ../ из-за того что etc вложена в другие директории)
+<kbd>Flag</kbd> xcoXLmzMkoIP9D7hlgPlh9XD7OgLAe5Q 
 
-в конце получаем вот такой флаг:
+Логинимся. Видим кнопки Home и About. Если на них потыкать то ничено не произойдёт. Открываем исходный код и видим подсказку:
+```html
+<!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
+```
 
->xcoXLmzMkoIP9D7hlgPlh9XD7OgLAe5Q 
-
-#### Справка:
-Здесь эксплуатируется LFI (Local File Inclusion), которая позволяет порлучить доступ к файлам сервера через некореектный ввод со стороны пользователя 
+Смотрим на ссылку: http://natas7.natas.labs.overthewire.org/index.php?page=about, но в параметре указываем тот самый путь который был указан в комментарии.
+Переходим и забираем флаг. 

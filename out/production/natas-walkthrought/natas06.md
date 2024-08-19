@@ -1,28 +1,33 @@
-### Natas 6
+# Natas 6
+<kbd>Username</kbd> natas6
 
-Логинимся. Страничка говорит нам ввести некий секрет и даёт нам посмотреть свой исходный код, просматриваем его. Нас интересует следующее:
-```
-<?
+<kbd>Password</kbd> 0RoJwHdSKWFTYR5WuiAewauSuNaBXned
 
+<kbd>Flag</kbd> bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
+
+Видим поле для ввода, которое предлагает нам ввести некий секрет, а так же нас дают просмотреть исходный код на отдельной странице.
+
+#### Проанализируем код на php построчно:
+
+```php
 include "includes/secret.inc";
+```
+include в php подключает внешние файлы, ну и видим сурс самого файла
 
-    if(array_key_exists("submit", $_POST)) {
-        if($secret == $_POST['secret']) {
+```php
+if(array_key_exists("submit", $_POST)) 
+```
+Здесь идёт проверка существует ли ключ submit в массиве POST
+
+```php
+if($secret == $_POST['secret']) {
         print "Access granted. The password for natas7 is <censored>";
-    } else {
-        print "Wrong secret";
-    }
-    }
-?>
 ```
-заостряем внимаение на этом:
+И ещё одно условие, проверяющее, соответствует ли переменная secret ключу secret внутри массива POST, если да, то нам выдадут пароль для natas7
 
-``` 
-include "includes/secret.inc
-```
+#### Далее:
+Переходим в файл который импотировали и смотрим его исходный код. Там и есть тот самый секрет.
+>
+>$secret = "FOEIUWGHFEEUHOFUOIU";
 
-вставляем это в ссылку, переходим пор ней и находим тот самый секрет, копируем его и вписываем его в поле для ввода.
-
-затем находим пароль для natas7
-
-> Access granted. The password for natas7 is bmg8SvU1LizuWjx3y7xkNERkHxGre0GS
+Копируем и втавляем в поле для ввода, забираем пароль.
